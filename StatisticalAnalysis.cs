@@ -88,7 +88,30 @@ namespace TextAnalyser
             /*
                 Returns all the elements that occur more than _n __times _ in the dataset
             */
-            return null;
+            ISet<string> mySet = new SortedSet<string>();
+            Dictionary<string, int> elements = new Dictionary<string, int>();
+            string element;
+
+            while ( this.iterator.HasNext() )
+            {
+                element = this.iterator.MoveNext();
+                if ( elements.ContainsKey( element ) )
+                {
+                    elements[ element ] += 1;
+                }
+                else
+                {
+                    elements.Add( element, 0 );
+                }
+            }
+
+            foreach ( KeyValuePair<string, int> keyValue in elements )
+            {
+                if ( keyValue.Value > _n_ )
+                    mySet.Add( keyValue.Key );
+            }
+
+            return mySet;
         } // end of method OccurMoreThan()
 
     } // end of class StatisticalAnalysis
