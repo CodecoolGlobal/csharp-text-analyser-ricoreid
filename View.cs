@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TextAnalyser
 {
-    public class View : StatisticalAnalysis
+    public class View
     {
         /*
             This class should be responsible for presenting the data to the user. 

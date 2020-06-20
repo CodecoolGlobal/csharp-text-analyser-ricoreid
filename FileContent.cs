@@ -1,7 +1,3 @@
-using System;
-using System.IO;
-using System.Text;
-using static System.Console;
 
 namespace TextAnalyser
 {
@@ -12,23 +8,22 @@ namespace TextAnalyser
     public class FileContent : IterableText
     {
         private string filename;
-        StreamReader reader;
-        public FileContent(string filename)
+        public FileContent(string filename1)
         {
-            this.filename = filename;
+            filename = filename1;
         } // End of constructor
 
-        public Iterator CharIterator()
+        public Iterator CharIterator() // read and return each character from the text file.
         {
-
-            return null;
+            
+            return new CharIterator(this);
 
         } // End of method CharIterator()
 
-        public Iterator WordIterator()
+        public Iterator WordIterator() // read and return each word from the text file.
         {
 
-            return null;
+            return new WordIterator(this);
 
         } // End of method WordIterator()
 

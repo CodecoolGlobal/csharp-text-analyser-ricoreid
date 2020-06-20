@@ -2,7 +2,7 @@ namespace TextAnalyser
 {
     public interface IterableText
     {
-        public Iterator CharIterator();
-        public Iterator WordIterator();
+        Iterator CharIterator();
+        Iterator WordIterator();
     }
 } // End of namespace TextAnalyser

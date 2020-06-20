@@ -11,19 +11,16 @@ namespace TextAnalyser
             Also, measure  the time of the program's execution. For example:
                 >dotnet run -- text1.txt text2.txt
         */
-        static readonly string textFile = @"/test.txt";
-        public static void main(string[] args)
-        {
-            
-            if(File.Exists(textFile))
-            {
-                Console.WriteLine("Yes");
-            }
-            else
-            {
-                Console.WriteLine("No");
-            }
 
+        public static void Main ( string[] args )
+        {
+            string filePath = @"test.txt";
+            FileContent sourceFile = new FileContent( filePath );
+            StatisticalAnalysis myAnalysis = new StatisticalAnalysis( sourceFile.CharIterator() );
+            StatisticalAnalysis myAnalysis1 = new StatisticalAnalysis( sourceFile.WordIterator() );
+            Console.WriteLine("Number of vowels: " + myAnalysis1.CountOf( "it", "is" ));
+            Console.WriteLine("Number of unique elements: " + myAnalysis1.DictionarySize());
+            Console.WriteLine("Total number of characters: " + myAnalysis1.Size());           
         }
     }
 }

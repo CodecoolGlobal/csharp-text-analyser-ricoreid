@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,21 +12,33 @@ namespace TextAnalyser
             NOTE: You may choose any data structure to store the processed data. 
             The choice will affect the amount of code you will have to write.
         */
+        View myView = new View();
+        Iterator iterator;
+        public StatisticalAnalysis(Iterator sourceFile)
+        {
+            iterator = sourceFile;            
+        } // end of constructor
 
-        // public Iterator StatisticalAnalysis = new Iterator();
-        // public StatisticalAnalysis(Iterator list)
-        // {
-
-        // } // end of constructor
-
-        public int CountOf(params string[] _elems)
+        public int CountOf( params string[] _elems )
         {
             /*
                 Returns sum of all occurrences (in the dataset) of the elements given as arguments ( _elems)_. 
                 Note: One string may be given as well. 
                 NOTE: To clarify - read how params keyword works 
             */
-            return 0;
+            string letter;
+            int sumOfElements = 0;
+            while ( this.iterator.HasNext() )
+            {
+                letter = this.iterator.MoveNext().ToLower();
+                for ( int index = 0; index < _elems.Length - 1; index++ )
+                {
+                    if ( letter == _elems[index] )
+                        sumOfElements++;
+                }
+
+            }
+            return sumOfElements;
         } // end of method CountOf()
 
         public int DictionarySize()
@@ -34,7 +47,24 @@ namespace TextAnalyser
                 Returns the number of unique elements of the dataset. 
                 It’s the size so-called Author’s Dictionary - the set of different words the author of the text uses.
             */
-            return 0;
+            List<string> elementSet = new List<string>();
+            string element;
+
+            while ( this.iterator.HasNext() )
+            {
+                element = this.iterator.MoveNext().ToLower();
+
+                if ( elementSet.Contains( element ) || string.IsNullOrWhiteSpace( element ) )
+                {
+                    continue;
+                }
+                else
+                {
+                    elementSet.Add( element );
+                }
+
+            }
+            return elementSet.Count;
         } // end of method DictionarySize()
 
         public int Size()
@@ -43,7 +73,14 @@ namespace TextAnalyser
                 Returns the total number of all elements in the dataset. 
                 This will be total number of words or total number of characters.
             */
-            return 0;
+            int total = 0;
+            
+            while ( this.iterator.HasNext() )
+            {
+                this.iterator.MoveNext();
+                total++;
+            }
+            return total;
         } // end of method Size()
 
         public ISet<string> OccurMoreThan(int _n_)
